@@ -290,6 +290,15 @@ app.get('/force-sync', async (req, res) => {
     res.redirect('/');
 });
 
+// Add this route near your other endpoints in server.js
+app.get('/health', (req, res) => {
+    res.status(200).json({
+        status: 'ok',
+        whatsappReady: isClientReady,
+        timestamp: new Date().toISOString()
+    });
+});
+
 app.post('/save-groups', (req, res) => {
     const selected = req.body.selectedGroups;
     monitoredGroupIds.clear();
